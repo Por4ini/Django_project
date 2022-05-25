@@ -1,0 +1,34 @@
+{% extends 'base.html'%}
+
+{% block title %}{{ title }}{% endblock %}
+
+{% block content %}
+<div class="row featurette">
+    {% for item in profile %}
+    <div class="col-md-6 order-md-2">
+        <table class="table">
+            <thead>
+            <tr>
+                <th scope="col">Пошта</th>
+                <th scope="col">Nickname</th>
+                <th scope="col">Громада</th>
+                <th scope="col">Роль</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <th scope="row">{{ item.user.email }}</th>
+                <td>{{ item.nickname }}</td>
+                <td>{{ item.community }}</td>
+                <td>{{ item.position }}</td>
+            </tr>
+            </tbody>
+        </table>
+
+    </div>
+        <img data-src="holder.js/300x300/auto" alt="300x300"
+             src='{{ item.avatar.url }}'
+             style="width: 300px; height: 300px;">
+    {% endfor %}
+</div>
+{% endblock %}
