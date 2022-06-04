@@ -10,7 +10,7 @@
             <thead>
             <tr>
                 <th scope="col">Пошта</th>
-                <th scope="col">Nickname</th>
+                <th scope="col">Ім'я</th>
                 <th scope="col">Громада</th>
                 <th scope="col">Роль</th>
             </tr>
@@ -18,8 +18,8 @@
             <tbody>
             <tr>
                 <th scope="row">{{ item.user.email }}</th>
-                <td>{{ item.nickname }}</td>
-                <td>{{ item.community }}</td>
+                <td>{{ item.user }}</td>
+                <td>{{ item.hromady }}</td>
                 <td>{{ item.position }}</td>
             </tr>
             </tbody>
@@ -31,4 +31,5 @@
              style="width: 300px; height: 300px;">
     {% endfor %}
 </div>
+
 {% endblock %}

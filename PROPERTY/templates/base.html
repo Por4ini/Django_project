@@ -6,23 +6,27 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>{% block title %} ПТН ПНХ {% endblock %}</title>
     <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css'%}">
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.13.1/themes/base/jquery-ui.css">
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+    <script>
+       function onSubmit(token) {
+         document.getElementById("demo-form").submit();
+       }
+
+
+    </script>
+
 </head>
 <body>
 
 </body>
 
 <head>
-    <title>{% block head_title %}{% endblock %}</title>
-    {% block extra_head %}
-    {% endblock %}
+    {% include 'inc/_nav.html'%}
 </head>
 <body>
-{% block body %}
-
-
-{% include 'inc/_nav.html'%}
 {% if messages %}
-<div>
+<div class="pricing-header text text-center">
     <strong>Messages:</strong>
     <ul>
         {% for message in messages %}
@@ -31,13 +35,10 @@
     </ul>
 </div>
 {% endif %}
-<div class="pricing-header p-3 pb-md-4 mx-auto text-center">
+<div class="container">
     {% block content %}
     {% endblock %}
 </div>
-{% endblock %}
-{% block extra_body %}
-{% endblock %}
 <script src="{% static 'bootstrap/js/bootstrap.min.js'%}"></script>
 </body>
 </html>

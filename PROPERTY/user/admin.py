@@ -1,10 +1,23 @@
 from django.contrib import admin
-from .models import Profile
+from .models import CustomUser
 
 
-class ProfAdmin(admin.ModelAdmin):
-    list_display = ("nickname", "position", "community", "avatar")
-    search_fields = []
+class CustomUserAdmin(CustomUser):
+    model = CustomUser
+    list_display = ('email', 'is_active',)
+    list_filter = ('email', 'is_active',)
+    fieldsets = (
+        (None, {'fields': ('email', 'password')}),
+        ('Permissions', {'fields': ('is_staff', 'is_active')}),
+    )
+    add_fieldsets = (
+        (None, {
+            'classes': ('wide',),
+            'fields': ('email', 'password1', 'password2', 'is_staff', 'is_active')}
+         ),
+    )
+    search_fields = ('email',)
+    ordering = ('email',)
 
 
-admin.site.register(Profile)
+admin.site.register(CustomUser)

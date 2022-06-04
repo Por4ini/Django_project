@@ -36,11 +36,12 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'allauth',
-    'allauth.account',
-    'allauth.socialaccount',
     'user',
     'hromady',
+    'objects',
+    'subjects',
+    'captcha',
+
 ]
 
 MIDDLEWARE = [
@@ -151,9 +152,10 @@ SOCIALACCOUNT_PROVIDERS = {
         }
     }}
 AUTHENTICATION_BACKENDS = (
-   "django.contrib.auth.backends.ModelBackend",
-   "allauth.account.auth_backends.AuthenticationBackend"
+    "django.contrib.auth.backends.ModelBackend",
+
 )
+AUTH_USER_MODEL = 'user.CustomUser'
 
 ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_USERNAME_REQUIRED = False
@@ -171,4 +173,9 @@ EMAIL_HOST_USER = DEFAULT_FROM_EMAIL = 'porchini@ukr.net'
 EMAIL_HOST_PASSWORD = 's7lrlWNgFB997OV9'
 EMAIL_USE_TLS = False
 EMAIL_USE_SSL = True
+
+RECAPTCHA_PUBLIC_KEY = '6LdSVSMgAAAAALLMMJj25LvbmTkkG4u7s1An7wQl'
+RECAPTCHA_PRIVATE_KEY = '6LdSVSMgAAAAAOfQvAiTSJvlzW1560ZNVg8L1aBx'
+RECAPTCHA_DEFAULT_ACTION = "generic"
+RECAPTCHA_SCORE_THRESHOLD = 0.5
 
