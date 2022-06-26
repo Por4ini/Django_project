@@ -83,7 +83,7 @@ WSGI_APPLICATION = 'PROPERTY.wsgi.application'
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
 
-# В поле нижче портібно передати всі данні вашої БД!!!!!!!!!!!
+# В поле нижче портібно передати всі данні вашої БД!!!!!!!!!!!`
 
 DATABASES = {
     'default': {
