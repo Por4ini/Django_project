@@ -1,5 +1,5 @@
 {% extends 'base.html'%}
-
+{% load static %}
 {% block title %}{{ title }}{% endblock %}
 
 {% block content %}
@@ -17,19 +17,39 @@
             </thead>
             <tbody>
             <tr>
-                <th scope="row">{{ item.user.email }}</th>
-                <td>{{ item.user }}</td>
-                <td>{{ item.hromady }}</td>
-                <td>{{ item.position }}</td>
+
+                <td>{{ item.email }}</td>
+                <td>{{ item.first_name }} {{ item.last_name }}</td>
+                <td>{{ item.community.locality }}</td>
+                <td>{{ item.role }}</td>
+
             </tr>
             </tbody>
-        </table>
 
+        </table>
+        <p class="text-center">{{ item.extra }}</p></br>
+        <div class="btn-group" role="group" aria-label="Basic outlined example">
+            <a href="{% url 'change'%}" class="btn btn-secondary" role="button" aria-pressed="true">Змінити
+                інформацію</a>
+            <a href="{% url 'change_com'%}" class="btn btn-secondary" role="button" aria-pressed="true">Змінити
+                громаду</a>
+            <a href="{% url 'change_password'%}" class="btn btn-secondary" role="button" aria-pressed="true">Змінити
+                пароль</a>
+            <a href="{% url 'send_request'%}" class="btn btn-secondary" role="button" aria-pressed="true">Заявка на отримання ролі</a>
+        </div>
     </div>
-        <img data-src="holder.js/300x300/auto" alt="300x300"
-             src='{{ item.avatar.url }}'
-             style="width: 300px; height: 300px;">
+    {% if item.photo %}
+    <img data-src="holder.js/300x300/auto" alt="300x300"
+         src='{{ item.photo.url }}'
+         style="width: 300px; height: 300px;">
+    {% else %}
+    <img data-src="holder.js/300x300/auto" alt="300x300"
+         src="{% static 'PROPERTY/media/ava.png'%}"
+         style="width: 300px; height: 300px;">
+    {% endif %}
+
     {% endfor %}
+
 </div>
 
 {% endblock %}

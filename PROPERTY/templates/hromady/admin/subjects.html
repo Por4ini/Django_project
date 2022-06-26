@@ -1,0 +1,66 @@
+{% extends 'base.html'%}
+
+{% block title %}{{ context.title }}{% endblock %}
+
+{% block content %}
+<div class="row mb-2">
+
+    <h2 class="text text-center">Список суб'єктів:</h2>
+    {% for item in objects %}
+    <a href="/{{item.hromada.code}}/administrator/object/subjects/create/{{item.id}}" type="button" class="btn ">Створити
+        суб'єкт</a>
+    {% endfor %}
+    <div class="table-responsive">
+        <table class="table table-striped table-sm">
+
+            <thead>
+
+            <tr>
+                <th scope="col">Назва</th>
+                <th scope="col">Статус</th>
+                <th scope="col">Орендар/Балансоутримувач</th>
+                <th scope="col">Складові частини</th>
+                <th scope="col">Загальна площа</th>
+                <th scope="col">Період користування</th>
+
+            </tr>
+            </thead>
+            <tbody>
+            {% for item in subjects %}
+            <tr>
+                <td>{{ item.title }}</td>
+                <td>{{ item.status }}</td>
+                <td>{{ item.balance_holder }}</td>
+                <td>{{ item.components }}</td>
+                <td>{{ item.area }}</td>
+                <td>{{ item.period_of_use }}</td>
+                <td>
+                    <div class="botton group">
+                        <a href="/{{item.object.hromada.code}}/administrator/object/subjects/update/{{item.id}}"
+                           type="button"
+                           class="btn ">Змінити</a>
+
+                        <a href="/{{item.object.hromada.code}}/administrator/object/subjects/delete/{{item.id}}"
+                           type="button"
+                           class="btn ">Видалити</a>
+
+                        <a href="/{{item.object.hromada.code}}/administrator/object/subjects/image/{{item.id}}"
+                           type="button"
+                           class="btn ">Зображення</a>
+
+
+                        <a href="/{{item.object.hromada.code}}/administrator/object/subjects/document/{{item.id}}"
+                           type="button"
+                           class="btn ">Документи</a>
+                    </div>
+                </td>
+
+
+            </tr>
+            {% endfor %}
+
+            {% endblock %}
+            </tbody>
+        </table>
+    </div>
+</div>

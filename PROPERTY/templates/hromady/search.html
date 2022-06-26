@@ -1,9 +1,0 @@
-{% extends 'base.html' %}
-    {% block title %}Поиск{% endblock %}
-
-{% block content %}
-
-{% for item in hromady %}
-<a>Громада: {{ item.locality }}|{{ item.type }}|{{ item.district }}|{{ item.region}} <br></a>
-{% endfor %}
-{% endblock %}

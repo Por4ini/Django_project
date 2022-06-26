@@ -21,9 +21,12 @@ from django.conf import settings
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('user/', include('user.urls')),
-    path('', include('hromady.urls')),
-    path('objects/', include('objects.urls')),
-    path('objects/subjects/', include('subjects.urls')),
+    path('', include('hromady.urls', namespace='hromady')),
+    path('', include('objects.urls')),
+    path('', include('subjects.urls')),
+    path('oauth/', include('social_django.urls', namespace='social')),
+    path('', include('administrator.urls')),
+    path('', include('forum.urls'))
 ]
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

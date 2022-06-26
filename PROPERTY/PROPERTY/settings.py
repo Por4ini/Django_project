@@ -40,8 +40,10 @@ INSTALLED_APPS = [
     'hromady',
     'objects',
     'subjects',
+    'administrator',
     'captcha',
-
+    'social_django',
+    'forum',
 ]
 
 MIDDLEWARE = [
@@ -52,6 +54,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'social_django.middleware.SocialAuthExceptionMiddleware',
 ]
 
 ROOT_URLCONF = 'PROPERTY.urls'
@@ -67,6 +70,8 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'social_django.context_processors.backends',
+                'social_django.context_processors.login_redirect',
             ],
         },
     },
@@ -115,7 +120,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'uk'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Europe/Kiev'
 
 USE_I18N = True
 
@@ -130,6 +135,7 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'PROPERTY/static'),
 ]
+
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'PROPERTY/media')
 MEDIA_URL = '/media/'
@@ -152,6 +158,9 @@ SOCIALACCOUNT_PROVIDERS = {
         }
     }}
 AUTHENTICATION_BACKENDS = (
+    'social_core.backends.facebook.FacebookOAuth2',
+    'social_core.backends.twitter.TwitterOAuth',
+    'social_core.backends.github.GithubOAuth2',
     "django.contrib.auth.backends.ModelBackend",
 
 )
@@ -164,7 +173,7 @@ ACCOUNT_SESSION_REMEMBER = True
 ACCOUNT_AUTHENTICATION_METHOD = "email"
 ACCOUNT_UNIQUE_EMAIL = True
 
-LOGIN_REDIRECT_URL = 'home'
+
 ACCOUNT_LOGOUT_REDIRECT_URL = 'home'
 
 EMAIL_HOST = 'smtp.ukr.net'
@@ -178,4 +187,11 @@ RECAPTCHA_PUBLIC_KEY = '6LdSVSMgAAAAALLMMJj25LvbmTkkG4u7s1An7wQl'
 RECAPTCHA_PRIVATE_KEY = '6LdSVSMgAAAAAOfQvAiTSJvlzW1560ZNVg8L1aBx'
 RECAPTCHA_DEFAULT_ACTION = "generic"
 RECAPTCHA_SCORE_THRESHOLD = 0.5
+
+LOGIN_URL = 'login'
+LOGOUT_URL = 'logout'
+LOGIN_REDIRECT_URL = 'home'
+
+SOCIAL_AUTH_FACEBOOK_KEY = '608821130197619'  # App ID
+SOCIAL_AUTH_FACEBOOK_SECRET = 'aebc264ea4acdbb6f12586ff87f4adb7'  # App Secret
 

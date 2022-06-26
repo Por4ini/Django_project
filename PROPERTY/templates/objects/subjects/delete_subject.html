@@ -1,0 +1,14 @@
+{% extends 'base.html'%}
+
+{% block title %}{{ title }}{% endblock %}
+
+{% block content %}
+<p>Ви дійсно бажаєте видалити "{{item}}"</p>
+<form action="/{{item.object.hromada.code}}/object/subject/delete/{{item.id}}", method="POST">
+    {% csrf_token %}
+    <a href="/{{item.object.hromada.code}}/object/{{item.object.id}}">Ні, залишу</a>
+
+    <input type="submit" name="Confirm">
+</form>
+
+{% endblock %}

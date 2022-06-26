@@ -1,0 +1,120 @@
+{% extends 'base.html'%}
+{% load static %}
+{% block title %}{{ context.title }}{% endblock %}
+{% block content %}
+
+<div class="header">
+    {% for item in hromada %}
+    {% if item.flag %}
+    <div class="header_item">
+        <img src='{{ item.flag.url }}'>
+    </div>
+    {% else %}
+    <div class="header_item">
+        <img src="{% static 'PROPERTY/image/flag.gif'%}">
+    </div>
+    {% endif %}
+    {% if item.emblem %}
+    <div class="header_item">
+        <img src='{{ item.emblem.url }}'>
+    </div>
+    {% else %}
+    <div class="header_item">
+        <img src="{% static 'PROPERTY/image/emblem.png'%}">
+    </div>
+    {% endif%}
+    <div class="header_item header_item_text text-center">
+        <h3>{{ item.locality }} {{ item.type }}</h3>
+        <h4>{{ item.district }} {{ item.region }}</h4>
+        <div class="row">
+            {% for item in contacts %}
+            <div class="col-sm-6">
+                <div class="card" style="width: 18rem;">
+
+                    <div class="card-body">
+                        <h5 class="card-title">{{item.name}}</h5>
+                        <h6 class="card-subtitle mb-2 text-muted">{{ item.role }}</h6>
+                        <p class="card-text">{{item.phone}}</p>
+                        <p class="card-text">{{item.messenger}}</p>
+
+                    </div>
+
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+
+    </div>
+</div>
+
+
+{% endfor %}
+</div>
+<div class="row mb-2">
+
+    <h1 class="text text-center"> Список об'єктів громади: </h1>
+       {% if request.user.role.title == 'Адміністратор громади' and 'Технік' %}
+    {% for item in hromada %}
+    <a href="/{{item.code}}/object/create/" type="button" class="btn ">Створити об'єкт</a>
+    {% endfor %}
+    {% endif %}
+    <div class="table-responsive">
+        <table class="table table-striped table-sm">
+
+            <thead>
+            <tr>
+                <th scope="col">Назва</th>
+                <th scope="col">Адреса</th>
+                <th scope="col">Складові частини</th>
+                <th scope="col">Розмір частки</th>
+                <th scope="col">Загальна площа</th>
+            </tr>
+            </thead>
+            {% for item in objects %}
+            <tbody>
+            <tr>
+
+                <td>
+                    <a href="/{{item.hromada.code}}/object/{{item.id}}">{{ item.title }}</a>
+                </td>
+                <td>{{ item.address }}</td>
+                <td>{{ item.components }}</td>
+                <td>{{ item.share_size }}</td>
+                <td>{{ item.total_area }}</td>
+                   {% if request.user.role.title == 'Адміністратор громади' and 'Технік' %}
+                <td><a href="/{{item.hromada.code}}/object/update/{{item.id}}" type="button" class="btn ">Змінити</a>
+                    <a href="/{{item.hromada.code}}/object/delete/{{item.id}}" type="button" class="btn ">Видалити</a>
+                </td>
+                    {% endif %}
+
+            </tr>
+
+
+            </tbody>
+            {% endfor %}
+        </table>
+
+    </div>
+
+</div>
+<h2 class="text text-center">Оголошення :</h2>
+<div class="row align-items-md-stretch">
+    {% for item in advertisement %}
+
+    <div class="col-md-6">
+        <div class="h-100 p-5 bg-light border rounded-3">
+
+            <h2>{{ item.title_advertisement }}</h2>
+            <p>{{ item.advertisement }}</p>
+            <p class="text text-outline-secondary">{{ item.created_at }}</p>
+
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="h-100 p-5 bg-light border rounded-3">
+            <img src='{{ item.image_advertisement.url }}' width="100%" height="100%">
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}

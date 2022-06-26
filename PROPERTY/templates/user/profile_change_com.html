@@ -1,0 +1,18 @@
+{% extends 'base.html'%}
+
+{% block title %}{{ title }}{% endblock %}
+{% block content %}
+
+<div class="w-100 text-cente">
+    <form class="form-inline" action="{% url 'change_com_search' %}">
+        <div class="input-group">
+            <input type="search" name="q" placeholder="Оберіть громаду" id="tags" class="form-control">
+            <span class="input-group-btn">
+                <button class="btn btn-primary-success my-2 my-sm-0" type="submit">Обрати</button>
+            </span>
+        </div>
+    </form>
+</div>
+
+
+{% endblock %}

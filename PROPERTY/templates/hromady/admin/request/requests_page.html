@@ -1,0 +1,15 @@
+{% extends 'base.html'%}
+
+{% block title %}{{ context.title }}{% endblock %}
+{% block content %}
+{% for item in data %}
+<dev class="card">
+    <p>Користувач: {{item.email}} <br> Громада: {{ item.hromada }} </p>
+    <div class="btn-group">
+        <a class="btn" href="/requests/success/{{item.id}}" type="button">Підтвердити</a>
+        <a class="btn" href="/requests/denial/{{item.id}}" type="button">Відмовити</a></div>
+</dev>
+{% endfor %}
+
+
+{% endblock %}

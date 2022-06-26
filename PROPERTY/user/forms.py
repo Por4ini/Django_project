@@ -6,35 +6,56 @@ from captcha.fields import ReCaptchaField
 
 
 class CustomUserCreationForm(UserCreationForm, ModelForm):
-    email = forms.EmailField(label='Введіть вашу пошту')
-    password1 = forms.CharField(label='Введіть пароль', widget=forms.PasswordInput)
-    password2 = forms.CharField(label='Повторіть пароль', widget=forms.PasswordInput)
+    email = forms.EmailField(label='Введіть вашу пошту', widget=forms.EmailInput(attrs={'class': 'form-control'}))
+    password1 = forms.CharField(label='Введіть пароль', widget=forms.PasswordInput(attrs={'class': 'form-control'}))
+    password2 = forms.CharField(label='Повторіть пароль', widget=forms.PasswordInput(attrs={'class': 'form-control'}))
     captcha = ReCaptchaField(label='Та й підтвердіть капчу')
-
 
     class Meta:
         model = CustomUser
-        fields = ('email', 'password1', 'password2', 'community')
+        fields = ('email', 'password1', 'password2')
+
 
 
 class CustomUserChangeForm(UserChangeForm):
-
-
-    class Meta:
-        model = CustomUser
-        fields = ('email',)
+    username = forms.EmailField(label='Введіть вашу пошту', widget=forms.EmailInput(attrs={'class': 'form-control'}))
 
 
 class UserLoginForm(AuthenticationForm):
+    username = forms.EmailField(label='Введіть вашу пошту', widget=forms.EmailInput(attrs={'class': 'form-control'}))
+    password = forms.CharField(label='Введіть пароль', widget=forms.PasswordInput(attrs={'class': 'form-control'}))
     captcha = ReCaptchaField(label="Та й підтвердіть капчу")
 
     class Meta:
         model = CustomUser
-        fields = ('email', 'password')
-
-    widgets = {
-        'email': forms.EmailInput(attrs={"class": "form-floating mb-3"}),
-        'password': forms.PasswordInput(attrs={"class": "form-floating mb-3"}),
+        fields = ('email', 'password',)
 
 
-    }
+class CustomUserForm(ModelForm):
+    class Meta:
+        model = CustomUser
+        fields = ['email', 'first_name', 'last_name', 'photo', 'extra']
+        widgets = {
+            'email': forms.EmailInput(attrs={'class': 'form-control'}),
+            'first_name': forms.TextInput(attrs={'class': 'form-control'}),
+            'last_name': forms.TextInput(attrs={'class': 'form-control'}),
+            "photo": forms.FileInput(attrs={'class': 'form-control'}),
+            'extra': forms.Textarea(attrs={'class': 'form-control'}),
+        }
+
+class ChangeCommunityForm(ModelForm):
+    class Meta:
+        model = CustomUser
+        fields = ['community']
+        widgets = {
+            'community': forms.TextInput(attrs={'class': 'form-control'})
+        }
+
+
+class ChangeRoleForm(ModelForm):
+    class Meta:
+        model = CustomUser
+        fields = ['role']
+        widgets = {
+            'role': forms.Select(attrs={'class': 'form-control'})
+        }

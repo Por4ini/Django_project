@@ -1,0 +1,16 @@
+{% extends 'base.html'%}
+
+{% block title %}{{ title }}{% endblock %}
+
+{% block content %}
+<p>Ви дійсно бажаєте видалити "{{data}}"</p>
+
+<form action="/{{code}}/object/image_delete/{{pk}}" method="POST">
+    {% csrf_token %}
+    <a href="/{{code}}/object/{{data.object_id}}">Ні, залишу</a>
+
+    <input type="submit" name="Видалити">
+</form>
+
+
+{% endblock %}
