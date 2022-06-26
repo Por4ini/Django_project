@@ -1,0 +1,125 @@
+{% extends 'base.html'%}
+
+{% block title %}{{ title }}{% endblock %}
+
+{% block content %}
+
+{% for item in subjects%}
+<div class="p-5 mb-4 bg-light rounded-3">
+    <div class="container-fluid py-5">
+        {% for item in subjects %}
+        <div class="page-content page-container" id="page-content">
+            <div class="padding">
+                <div class="row container d-flex justify-content-center">
+                    <div class="col-lg-8 grid-margin stretch-card">
+                        <div class="card">
+                            <div class="card-body">
+                                <h4 class="card-title">Cуб'єкт: {{ item.title }} </h4>
+
+                                <div class="table-responsive">
+                                    <table class="table">
+                                        <tbody>
+                                        <tr>
+                                            <td>Статус</td>
+                                            <td>{{ item.status }}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Орендар/Балансоутримувач</td>
+                                            <td>{{ item.balance_holder }}</td>
+
+                                        </tr>
+                                        <tr>
+                                            <td>Складові частини</td>
+                                            <td>{{ item.components }}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Розмір частки</td>
+                                            <td>{{ item.part_size }}</td>
+
+                                        </tr>
+                                        <tr>
+                                            <td>Площа</td>
+                                            <td>{{ item.area }}</td>
+
+                                        </tr>
+                                        <tr>
+                                            <td>Період користування</td>
+                                            <td>{{ item.period_of_use }}</td>
+
+                                        </tr>
+                                        <tr>
+                                            <td>{{item.extra}}</td>
+                                        </tr>
+                                        <tr>
+                                            <td><h4>Документи:</h4>
+
+                                            </td>
+                                            {% if request.user.role.title == 'Техніе' or request.user.role.title == 'Бухлалтер' or request.user.role.title == 'Адміністратор громади'%}
+                                            <td><a href="/{{code}}/object/subject/document_create/{{item.id}}"
+                                                   type="button"
+                                                   class="btn ">Додати документ</a></td>{%endif%}
+                                        </tr>
+                                        {% for item in documents %}
+
+                                        <tr>
+                                            <td>
+
+                                                <a href="{{ item.documents.url }}"> Завантажити: {{item.title}}</a>
+
+                                            </td>
+                                            <td>
+                                                {% if request.user.role.title == 'Техніе' or request.user.role.title == 'Бухлалтер' or request.user.role.title == 'Адміністратор громади'%}
+                                                <a href="/{{code}}/object/subject/document_delete/{{item.id}}"
+                                                   class="btn btn-primary">Видалити</a>
+                                                 {% endif %}
+
+                                            </td>
+                                        </tr>
+
+
+                                        {% endfor %}
+                                        </tbody>
+                                    </table>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div>
+
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-sm-6">
+        {% if request.user.role.title == 'Техніе' or request.user.role.title == 'Бухлалтер' or request.user.role.title == 'Адміністратор громади'%}
+        <a href="/{{code}}/object/subject/image_create/{{item.id}}" type="button" class="btn ">Додати
+            зображення</a>
+        {% endif %}
+
+
+        <div class="card-group">
+            {% for item in image %}
+            <div class="card">
+                <img class="img-rounded" width="100%" height="100%" src="{{ item.image.url }}">
+                <div class="card-body">
+                    <p class="card-text">{{item.title}}</p>
+                            {% if request.user.role.title == 'Техніе' or request.user.role.title == 'Бухлалтер' or request.user.role.title == 'Адміністратор громади'%}
+                    <a href="/{{code}}/object/subject/image_delete/{{item.id}}" class="btn btn-primary">Видалити</a>
+                    {% endif %}
+                    </p>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+
+    </div>
+</div>
+
+{% endfor %}
+{% endblock %}

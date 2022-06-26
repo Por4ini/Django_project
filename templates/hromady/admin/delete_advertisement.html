@@ -1,0 +1,15 @@
+{% extends 'base.html'%}
+
+{% block title %}{{ title }}{% endblock %}
+
+{% block content %}
+<p>Ви дійсно бажаєте видалити оголошення "{{data.title_advertisement}}"?</p>
+
+<form action="/{{data.community.code}}/administrator/advertisement/delete/{{data.id}}" method="POST">
+    {% csrf_token %}
+    <a href="/{{data.community.code}}/administrator/contacts/">Залишити</a>
+
+    <input class="btn" type="submit" value="Видалити">
+</form>
+
+{% endblock %}

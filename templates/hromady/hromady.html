@@ -1,0 +1,52 @@
+{% extends 'base.html'%}
+{% load static %}
+{% block title %}{{ title }}{% endblock %}
+
+{% block content %}
+
+{% for item in hromada %}
+<div class="header">
+    {% if item.flag %}
+    <div class="header_item">
+        <img src='{{ item.flag.url }}'>
+    </div>
+    {% else %}
+    <div class="header_item">
+        <img src="{% static 'PROPERTY/image/flag.gif'%}">
+    </div>
+    {% endif %}
+    {% if item.emblem %}
+    <div class="header_item">
+        <img src='{{ item.emblem.url }}'>
+    </div>
+    {% else %}
+    <div class="header_item">
+        <img src="{% static 'PROPERTY/image/emblem.png'%}">
+    </div>
+    {% endif%}
+    <div class="header_item header_item_text text-center">
+        <h3>{{ item.locality }} {{ item.type }}</h3>
+        <h4>{{ item.district }} {{ item.region }}</h4>
+        <h4>KATOTTГ : {{ item.code }}</h4>
+        {% if item.registration == 0 %}
+          {% if user.role.title == 'Адміністратор громади' %}
+                {% if item.code == user.community.code %}
+        <h4>Громада не зареестрована <a href="/{{item.code}}/administrator">Зарееструвати</a></h4>
+                {% endif%}
+
+        {% else %}
+        <h4>Громада не зареєстрована</h4>
+        <p>Зверніться до адміністрації</p>
+        {% endif %}
+        {% else %}
+
+        <h4><a href="/{{item.code}}">Сторінка громади</a></h4>
+
+        {% endif %}
+    </div>
+
+</div>
+
+{% endfor %}
+
+{% endblock %}

@@ -1,0 +1,45 @@
+{% extends 'base.html'%}
+
+{% block title %}{{ title }}{% endblock %}
+{% block content %}
+<style>
+    body{
+    margin-top:20px;
+    background:#eee;
+    color: #708090;
+}
+.icon-1x {
+    font-size: 24px !important;
+}
+a{
+    text-decoration:none;
+}
+.text-primary, a.text-primary:focus, a.text-primary:hover {
+    color: #00ADBB!important;
+}
+.text-black, .text-hover-black:hover {
+    color: #000 !important;
+}
+.font-weight-bold {
+    font-weight: 700 !important;
+}
+
+
+</style>
+{% for item in category %}
+<div class="col-lg-9 mb-3">
+
+    <div class="card row-hover pos-relative py-3 px-3 mb-3 border-primary border-top-0 border-right-0 border-bottom-0 rounded-0">
+        <div class="row align-items-center">
+
+            <div class="col-md-8 mb-3 mb-sm-0"><h5>
+                <a href="/forum/category/{{item.id}}" class="text-primary">{{ item.title }}</a>
+            </h5>
+            </div>
+
+        
+        </div>
+    </div>
+</div>
+{%endfor%}
+{% endblock %}

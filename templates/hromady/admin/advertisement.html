@@ -1,0 +1,32 @@
+{% extends 'base.html'%}
+
+{% block title %}{{ context.title }}{% endblock %}
+{% block content %}
+
+
+<div class="row mb-2">
+{% for item in com %}
+<a href="/{{item.code}}/administrator/advertisement/create" type="button" class="btn ">Додати новину</a>
+{% endfor %}
+{% for item in data %}
+<div class="row align-items-md-stretch">
+    <div class="col-md-6">
+        <div class="h-100 p-5 bg-light border rounded-3">
+
+            <h2>{{ item.title_advertisement }}</h2>
+            <p>{{ item.advertisement }}</p>
+            <p class="text text-outline-secondary">{{ item.created_at }}</p>
+            <a class="btn" href="/{{item.community.code}}/administrator/advertisement/update/{{item.id}}" type="button">Змінити</a>
+            <a class="btn" href="/{{item.community.code}}/administrator/advertisement/delete/{{item.id}}" type="button">Видалити</a>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="h-100 p-5 bg-light border rounded-3">
+            <img src='{{ item.image_advertisement.url }}' width="100%" height="100%">
+        </div>
+    </div>
+    {% endfor %}
+
+</div>
+</div>
+{% endblock %}

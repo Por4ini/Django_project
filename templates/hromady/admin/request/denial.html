@@ -1,0 +1,15 @@
+{% extends 'base.html'%}
+
+{% block title %}{{ context.title }}{% endblock %}
+{% block content %}
+
+<p>Бажаєте відмовити користувачу {{data.email}} в дозволі ?</p>
+<form action="/requests/denial/{{ data.id }}" method="POST">
+    {% csrf_token %}
+    <input class="btn" type="submit" value="Відмовити">
+    <a class="btn btn=primary" href="/requests">Назад</a>
+
+
+</form>
+
+{% endblock %}

@@ -1,0 +1,54 @@
+{% extends 'base.html'%}
+
+{% block title %}{{ title }}{% endblock %}
+
+{% block content %}
+<div class="row mb-2">
+
+    <h1 class="text text-center"> Список об'єктів громади: </h1>
+    {% for item in hromada %}
+    <a href="/{{item.code}}/administrator/object/create/" type="button" class="btn ">Створити об'єкт</a>
+    {% endfor %}
+    <div class="table-responsive">
+        <table class="table table-striped table-sm">
+
+            <thead>
+            <tr>
+                <th scope="col">Назва</th>
+                <th scope="col">Адреса</th>
+                <th scope="col">Складові частини</th>
+                <th scope="col">Розмір частки</th>
+                <th scope="col">Загальна площа</th>
+            </tr>
+            </thead>
+            {% for item in objects %}
+            <tbody>
+            <tr>
+                <td>{{ item.title }}</td>
+                <td>{{ item.address }}</td>
+                <td>{{ item.components }}</td>
+                <td>{{ item.share_size }}</td>
+                <td>{{ item.total_area }}</td>
+                <td><a href="/{{item.hromada.code}}/administrator/object/update/{{item.id}}" type="button" class="btn ">Змінити</a>
+                    <a href="/{{item.hromada.code}}/administrator/object/delete/{{item.id}}" type="button" class="btn ">Видалити</a>
+                    <a href="/{{item.hromada.code}}/administrator/object/image/{{item.id}}"
+                       type="button"
+                       class="btn ">Зображення</a>
+                    <a href="/{{item.hromada.code}}/administrator/object/document/{{item.id}}"
+                       type="button"
+                       class="btn ">Документи</a>
+                    <a href="/{{item.hromada.code}}/administrator/object/subjects/{{item.id}}" type="button"
+                       class="btn ">Суб'єкти</a>
+                </td>
+
+            </tr>
+
+
+            </tbody>
+            {% endfor %}
+        </table>
+
+    </div>
+
+</div>
+{% endblock %}

@@ -1,0 +1,16 @@
+{% extends 'base.html'%}
+
+{% block title %}{{ title }}{% endblock %}
+
+{% block content %}
+<p>Ви дійсно бажаєте видалити тему?</p>
+
+<form action="" method="POST">
+    {% csrf_token %}
+    <input type="submit" name="Видалити">
+    <a class='btn 'href="/{{home}}">Ні, залишу</a>
+
+</form>
+
+
+{% endblock %}

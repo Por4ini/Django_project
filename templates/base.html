@@ -1,0 +1,64 @@
+<!doctype html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1 user-scalable=no,  maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="theme-color" content="#712cf9">
+    <title>{% block title %} ПТН ПНХ {% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css'%}">
+    <link rel="stylesheet" href="{% static 'bootstrap/css/style.css'%}">
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.13.1/themes/base/jquery-ui.css">
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+
+
+</head>
+<body>
+
+</body>
+
+<head>
+    {% include 'inc/_nav.html'%}
+</head>
+<body>
+{% if messages %}
+<div class="pricing-header text text-center">
+    <strong>Messages:</strong>
+    <ul>
+        {% for message in messages %}
+        <li>{{message}}</li>
+        {% endfor %}
+    </ul>
+</div>
+{% endif %}
+<div class="container">
+    {% block content %}
+    {% endblock %}
+</div>
+
+
+<script src="{% static 'bootstrap/js/bootstrap.min.js'%}"></script>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"
+        integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"></script>
+
+<script>
+  $( function() {
+
+  $( "#tags" ).autocomplete({
+    source: "{% url 'hromady:autosuggest'%}"
+    });
+  } );
+
+
+
+
+
+
+</script>
+
+</body>
+</html>

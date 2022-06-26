@@ -1,0 +1,15 @@
+{% extends 'base.html'%}
+
+{% block title %}{{ context.title }}{% endblock %}
+{% block content %}
+
+<div class="w-100 text-cente">
+    <form class="form-inline" action="{% url 'hromady:hromady'%}">
+        <div class="input-group">
+            <input type="search" name="q" placeholder="Оберіть громаду" id="tags" class="form-control">
+            <button class="btn btn-primary-success my-2 my-sm-0" type="submit">Обрати</button>
+        </div>
+    </form>
+</div>
+
+{% endblock %}

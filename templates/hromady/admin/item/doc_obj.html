@@ -1,0 +1,17 @@
+{% extends 'base.html'%}
+
+{% block title %}{{  title }}{% endblock %}
+
+{% block content %}
+
+<a class="btn" href="/{{code}}/administrator/object/create/document/{{pk}}">Додати документ</a>
+
+
+{% for item in document %}
+<div class="header_item">
+    <a href="{{ item.documents.url }}"> Завантажити: {{item.title}}</a>
+    <a class="btn" href="/{{code}}/administrator/object/delete/document/{{item.id}}">Видалити</a>
+</div>
+{% endfor %}
+
+{% endblock %}

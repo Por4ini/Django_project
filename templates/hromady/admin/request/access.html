@@ -1,0 +1,19 @@
+{% extends 'base.html'%}
+
+{% block title %}{{ context.title }}{% endblock %}
+{% block content %}
+
+
+<p>Бажаєте надати користувачу {{data.email}} права Адміністратора громади?</p>
+<form action="/requests/success/{{ data.id }}" method="POST">
+    {% csrf_token %}
+    <input class="btn" type="submit" value="Зробити адміном">
+
+    <a class="btn btn=primary" href="/requests">Назад</a>
+
+</form>
+
+
+
+
+{% endblock %}

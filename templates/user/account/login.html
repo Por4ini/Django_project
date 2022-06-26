@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+
+<div class="col-lg-6 mx-auto">
+    <form method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <input class="btn btn-primary" type="submit" value="Увійти">
+    </form>
+    <div class="btn-group" role="group" aria-label="Basic example">
+        <a class="btn =" href="{% url 'password_reset'%}">Відновити пароль</a>
+        <a href="{% url 'social:begin' 'facebook' %}" class="btn  "></i>Зайти через Facebook</a>
+    </div>
+</div>
+
+{% endblock %}
