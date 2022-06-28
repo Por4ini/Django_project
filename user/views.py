@@ -58,7 +58,7 @@ def user_login(request):
         form = UserLoginForm
     return render(request, 'user/account/login.html', {'form': form})
 
-def activate(uidb64, token):
+def activate(request, uidb64, token):
     try:
         uid = force_str(urlsafe_base64_decode(uidb64))
         user = CustomUser.objects.get(pk=uid)
